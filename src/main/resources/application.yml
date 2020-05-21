@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 1356
+    url: jdbc:mysql://localhost:3306/air_tickets_booking_system
+    driver-class-name: com.mysql.jdbc.Driver
+    #Spring Boot默认是不注入这些属性值的,需要自己绑定
+    druid:
+      #druid数据源专有配置
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedstatements: true
+      #配置监控统计拦截的filters,stat监控统计、Log4j:日志记录、wall:防御sql注入
+      #如果允许时报错java.lang. ClassNotFoundE:org.apache.log4j.Priority
+      #则导入 #log4j, maven : https://mvnrepository.com/artifact/log4j/log4j依赖即可
+      filters: stat, wall, 1og4j
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true; druid.stat.slowSqlMillis=500
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+
+# mybatis
+mybatis:
+  typeAliasesPackage: cn.cuit.mapperocations
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:cn/cuit/mapper/*.xml
