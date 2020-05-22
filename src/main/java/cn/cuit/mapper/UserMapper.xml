@@ -14,7 +14,20 @@
         <result column="idNumber" property="idNumber" jdbcType="VARCHAR"/>
         <result column="placedAt" property="placedAt" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <resultMap id="UserWithRoles" type="cn.cuit.model.User" extends="BaseResultMap">
+        <collection property="roles" ofType="cn.cuit.model.Role">
+            <id column="id" property="id" />
+            <result column="name" property="name"/>
+            <result column="nameZh" property="nameZh"/><!--开启了驼峰命名转换-->
+        </collection>
+    </resultMap>
     <select id="getAllUsers" resultMap="BaseResultMap">
-        select * from air_tickets_booking_system.user
+        select * from user
+    </select>
+    <select id="loadUserByUsername" parameterType="String" resultMap="BaseResultMap">
+        select * from user where username=#{username}
+    </select>
+    <select id="getUserRolesById"  resultType="cn.cuit.model.Role">
+        select * from role r,user_role ur where r.id=ur.rid and ur.uid=#{id}
     </select>
 </mapper>

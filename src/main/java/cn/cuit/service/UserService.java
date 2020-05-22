@@ -2,6 +2,8 @@ package cn.cuit.service;
 
 import cn.cuit.mapper.UserMapper;
 import cn.cuit.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,15 +12,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("service")
 public class UserService implements UserDetailsService {
     @Autowired
     UserMapper userMapper;
-
+    final static Logger logger= LoggerFactory.getLogger(UserService.class);
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("loadUserByUsername");
+        User user=userMapper.loadUserByUsername(username);
+        if(user==null){
+            throw new UsernameNotFoundException("用户名不存在");
+        }else{
+            logger.info(user.toString());
+        }
+        user.setRoles(userMapper.getUserRolesById(user.getId()));
+        return user;
     }
 
     public List<User> getAllUsers(){
