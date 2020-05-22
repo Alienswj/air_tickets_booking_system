@@ -27,14 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/manager/**").hasRole("ADMINISTRATOR")
+        http.authorizeRequests()
+                .antMatchers("/manager/**").hasRole("ADMINISTRATOR")
                 .antMatchers("/","/**").permitAll()
                 .and().formLogin().loginPage("/login")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .csrf().disable();
+                .and().logout().logoutSuccessUrl("/")
+                .and().csrf().disable();
     }
 
     @Bean
@@ -44,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("auth");
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 }

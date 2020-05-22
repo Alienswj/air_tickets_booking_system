@@ -1,4 +1,9 @@
 spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
@@ -19,9 +24,7 @@ spring:
       testOnBorrow: false
       testOnReturn: false
       poolPreparedstatements: true
-      #配置监控统计拦截的filters,stat监控统计、Log4j:日志记录、wall:防御sql注入
-      #如果允许时报错java.lang. ClassNotFoundE:org.apache.log4j.Priority
-      #则导入 #log4j, maven : https://mvnrepository.com/artifact/log4j/log4j依赖即可
+      #配置监控统计拦截的filters,stat监控统计、Logback:日志记录、wall:防御sql注入
       filters: stat, wall, slf4j
       useGlobalDataSourceStat: true
       connectionProperties: druid.stat.mergeSql=true; druid.stat.slowSqlMillis=500
@@ -33,7 +36,6 @@ spring:
           statement-log-enabled: true
           statement-executable-sql-log-enable: true
 
-
 # mybatis
 mybatis:
   typeAliasesPackage: cn.cuit.mapperocations
@@ -42,3 +44,13 @@ mybatis:
   mapper-locations: classpath:cn/cuit/mapper/*.xml
 logging:
   config: classpath:logback-config.xml
+server:
+  port: 8080
+
+---
+spring:
+  profiles: prod
+
+---
+spring:
+  profiles: test
