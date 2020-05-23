@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 @Mapper
 public interface UserMapper {
-    //int insert(User user);
+    int insertUser(User user);
     List<User> getAllUsers();
     List<Role> getUserRolesById(String id);
     User loadUserByUsername(String username);

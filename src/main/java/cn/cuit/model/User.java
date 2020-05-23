@@ -1,6 +1,9 @@
 package cn.cuit.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +16,8 @@ import java.util.List;
 
 @Data
 @Mapper
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
 public class User implements UserDetails {
 
     private String id;

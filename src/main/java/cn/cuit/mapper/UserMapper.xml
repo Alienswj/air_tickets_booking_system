@@ -30,4 +30,8 @@
     <select id="getUserRolesById"  resultType="cn.cuit.model.Role">
         select * from role r,user_role ur where r.id=ur.rid and ur.uid=#{id}
     </select>
+    <insert id="insertUser" parameterType="cn.cuit.model.User">
+        insert into user (id,username,password,name,gender,telephone,email,address,enabled,id_number) values (#{id},#{username},#{password},#{name},#{gender},#{telephone},#{email},#{address},true,#{idNumber});
+        insert into user_role (id,uid,rid) values (REPLACE(UUID(),"-",""),#{id},'5e5847afb1b74e3a841b55e9706b271b');
+    </insert>
 </mapper>
