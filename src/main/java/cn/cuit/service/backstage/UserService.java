@@ -1,4 +1,4 @@
-package cn.cuit.service;
+package cn.cuit.service.backstage;
 
 import cn.cuit.mapper.UserMapper;
 import cn.cuit.model.User;

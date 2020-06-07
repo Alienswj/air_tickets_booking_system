@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cuit.mapper.TravelerMapper">
+    <select id="getAllTravelersWithUid" parameterType="String" resultType="cn.cuit.model.TravelerInfo">
+        select * from traveler_info where uid=#{uid}
+    </select>
+    <delete id="deleteTravelerById" parameterType="String">
+        delete from traveler_info where id=#{id}
+    </delete>
+    <insert id="addTraveler" parameterType="cn.cuit.model.TravelerInfo">
+        insert into traveler_info (id, name, telephone, id_number, uid) VALUES (REPLACE(UUID(),'-',''),#{name},#{telephone},#{idNumber},#{uid})
+    </insert>
+</mapper>

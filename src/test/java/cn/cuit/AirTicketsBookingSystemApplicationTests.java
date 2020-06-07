@@ -8,6 +8,7 @@ class AirTicketsBookingSystemApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

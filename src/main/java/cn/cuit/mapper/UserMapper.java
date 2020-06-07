@@ -11,8 +11,13 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     int insertUser(User user);
+    int insertUserSelective(User user); //
     List<User> getAllUsers();
     List<Role> getUserRolesById(String id);
     User loadUserByUsername(String username);
 
+    int deleteUserById(String id); //
+    int deleteUserByUsername(String username); //
+    int updateUserSelective(User user); //
+    int updateUserByUsername(User user); //
 }

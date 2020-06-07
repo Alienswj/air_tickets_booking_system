@@ -1,10 +1,14 @@
 package cn.cuit.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
+@ApiModel(description = "注册表单")
 @Data
 public class RegistrationForm {
     private String id;

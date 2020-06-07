@@ -1,8 +1,15 @@
 package cn.cuit.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "返回响应数据")
 public class RespBean {
+    @ApiModelProperty("响应代码")
     private Integer status;
+    @ApiModelProperty("响应消息")
     private String msg;
+    @ApiModelProperty("响应体对象")
     private Object obj;
 
     public static RespBean build() {
