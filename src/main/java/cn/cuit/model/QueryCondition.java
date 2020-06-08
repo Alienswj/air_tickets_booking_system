@@ -1,6 +1,7 @@
 package cn.cuit.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -11,5 +12,6 @@ import java.util.Date;
 public class QueryCondition {
     String departure;
     String destination;
-    Date air_date;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    Date airDate;
 }

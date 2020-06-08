@@ -1,5 +1,6 @@
 package cn.cuit.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@ApiModel("用户信息")
 @Data
 @Mapper
 @AllArgsConstructor

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
-@Api("用户注册接口")
+@Api(tags="用户注册接口")
 @RestController
 @RequestMapping("/register")
 public class RegistrationController {

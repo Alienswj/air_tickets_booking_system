@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Api(tags = "与账号中保存的旅客信息相关操作")
 @RestController
@@ -39,11 +41,16 @@ public class TravelerInfoController {
     @ApiOperation(value = "删除旅客信息",notes = "通过路径传id值")
     @DeleteMapping("/traveler/{id}")
     public RespBean deleteTraveler(@PathVariable String id){
-
         if(travelerInfoService.deleteTraveler(id)){
             return RespBean.ok("删除成功！");
         }else{
             return RespBean.error("删除失败！");
         }
+    }
+
+    @ApiOperation("获取该用户保存的所有旅客信息")
+    @GetMapping("/traveler/{uid}")
+    public List<TravelerInfo> getAllTravelersWithUid(@PathVariable String uid){
+        return travelerInfoService.getAllTravelersWithUid(uid);
     }
 }

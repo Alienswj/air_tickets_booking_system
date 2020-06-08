@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.cuit.mapper.TicketMapper">
+    <select id="getAllTicketsWithDate" parameterType="cn.cuit.model.QueryCondition" resultType="cn.cuit.model.FlightTicket">
+        select  ticket.air_id,flight.airline,flight.aircraft_designation,flight.departure,flight.destination,flight.dep_time,flight.land_time,flight.price,ticket.air_date,ticket.capacity
+        from flight,ticket where ticket.air_id=flight.air_id and ticket.air_date=#{airDate} and flight.departure=#{departure} and flight.destination=#{destination}
+    </select>
+    <update id="updateTicketCapacityByAirIdAndAirDate">
+        update ticket set capacity=capacity+#{quantity} where air_id=#{airId} and air_date=#{airDate} and capacity>0
+    </update>
+    <insert id="insertTicketOrder" parameterType="cn.cuit.model.TicketOrder">
+        insert into ticket_order (id, tid, air_id, air_date, uid) VALUES (REPLACE(UUID(),'-',''),#{tid}, #{airId}, #{airDate}, #{uid})
+    </insert>
+    <delete id="deleteTicketOrderById" parameterType="String">
+        delete from ticket_order where id=#{id}
+    </delete>
+
+    <select id="getAllTicketOrdersWithTravelerInfoByUid" parameterType="String" resultType="cn.cuit.model.TicketOrderWithTravelerInfo">
+        select * from ticket_order,traveler_info where tid=traveler_info.id and ticket_order.uid=#{uid}
+    </select>
 </mapper>

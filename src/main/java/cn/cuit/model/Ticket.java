@@ -1,5 +1,6 @@
 package cn.cuit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,6 +15,7 @@ public class Ticket {
     @ApiModelProperty("航班号")
     private String airId;
     @ApiModelProperty("该航班执飞日期")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date airDate;
     @ApiModelProperty("余票量")
     private int capacity;

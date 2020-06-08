@@ -20,19 +20,12 @@ public class TicketController {
     @Autowired
     TicketService ticketService;
 
-    @ApiOperation(value = "查询所有机票")
+    @ApiOperation(value = "查询航线上所有机票")
     @GetMapping("/queryAllTickets")
     public List<FlightTicket> getAllTickets(@RequestBody QueryCondition queryCondition){
         return ticketService.getAllTickets(queryCondition);
     }
-    @ApiOperation(value = "订票",notes = "订票业务流程：登录的账号选择账号中曾经保存的任意旅客信息，" +
-            "如果没有可以临时添加，给该旅客订票")
-    @PostMapping("/booking")
-    public RespBean bookingTicket(@RequestBody TicketOrder ticketOrder){
-        if(ticketOrder==null)
-            return RespBean.error("订票失败");
-        return RespBean.ok("订票成功");
-    }
+
 
 
 
