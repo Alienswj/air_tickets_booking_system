@@ -1,13 +1,13 @@
 package cn.cuit.service.forestage;
 
 
-import cn.cuit.service.utils.DateUtils;
 import cn.cuit.mapper.TicketMapper;
 import cn.cuit.model.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -23,6 +23,13 @@ public class TicketService {
             return null;
         }*/
         return ticketMapper.getAllTicketsWithDate(queryCondition);
+    }
+
+    public PageInfo getAllTicketsByPage(QueryCondition queryCondition,int pageNum,int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<FlightTicket> list=ticketMapper.getAllTicketsWithDate(queryCondition);
+        PageInfo pageInfo=new PageInfo(list);
+        return pageInfo;
     }
 
 }

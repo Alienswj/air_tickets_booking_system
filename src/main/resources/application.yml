@@ -31,6 +31,7 @@ spring:
       stat-view-servlet:
         login-username: admin
         login-password: admin
+        enabled: true
       filter:
         commons-log:
           statement-log-enabled: true
@@ -38,6 +39,8 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  jackson:
+    time-zone: GMT+8
 
 # mybatis
 mybatis:
@@ -45,10 +48,21 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:cn/cuit/mapper/*.xml
+#logging
 logging:
   config: classpath:logback-config.xml
+  level:
+    root: info
 server:
-  port: 8080
+  port: 8081
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 
 ---
 spring:

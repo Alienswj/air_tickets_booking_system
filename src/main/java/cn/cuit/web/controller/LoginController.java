@@ -7,11 +7,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Api(tags="登录相关接口")
+
 @RestController
 public class LoginController {
 
@@ -23,8 +23,8 @@ public class LoginController {
 
     @GetMapping("/hello")
     public void sayHello(HttpServletRequest request, HttpServletResponse response){
-        response.setStatus(302);
-        response.setHeader("Location","/index.html");
+        //response.setStatus(302);
+        //response.setHeader("Location","/index.html");
         String names =request.getSession().getAttribute("SPRING_SECURITY_CONTEXT").toString();
         System.out.println(names);
         //return RespBean.error("hello");

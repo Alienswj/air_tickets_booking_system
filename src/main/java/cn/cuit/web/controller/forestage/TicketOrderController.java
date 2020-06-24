@@ -1,8 +1,9 @@
 package cn.cuit.web.controller.forestage;
 
 import cn.cuit.model.RespBean;
+import cn.cuit.model.Ticket;
 import cn.cuit.model.TicketOrder;
-import cn.cuit.model.TicketOrderWithTravelerInfo;
+import cn.cuit.model.TicketOrderWithTravelerInfoAndFlightInfo;
 import cn.cuit.service.forestage.TicketOrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,17 @@ public class TicketOrderController {
         }
     }
 
+    @PutMapping("/change")
+    public RespBean changeTicket(@RequestBody TicketOrder ticketOrder){
+        if(ticketOrderService.changeTicket(ticketOrder)){
+            return RespBean.ok("改签成功！");
+        }else{
+            return RespBean.error("改签失败！");
+        }
+    }
+
     @ApiOperation("退票")
-    @DeleteMapping("/refund")
+    @PutMapping("/refund")
     public RespBean refundTicket(@RequestBody TicketOrder ticketOrder){
         if(ticketOrderService.refundTicket(ticketOrder)){
             return RespBean.ok("退票成功！");
@@ -37,9 +47,18 @@ public class TicketOrderController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public RespBean deleteOrder(@PathVariable String id){
+        if(ticketOrderService.deleteTicketOrderById(id)){
+            return RespBean.ok("删除成功！");
+        }else{
+            return RespBean.error("删除失败!");
+        }
+    }
+
     @ApiOperation("查询所有订单")
     @GetMapping("/{uid}")
-    public List<TicketOrderWithTravelerInfo> getAllTicketOrdersWithTravelerInfoByUid(@PathVariable String uid){
+    public List<TicketOrderWithTravelerInfoAndFlightInfo> getAllTicketOrdersWithTravelerInfoByUid(@PathVariable String uid){
         return ticketOrderService.getAllTicketOrdersWithTravelerInfoByUid(uid);
     }
 }

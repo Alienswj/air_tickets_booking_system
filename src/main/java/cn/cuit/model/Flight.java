@@ -3,13 +3,11 @@ package cn.cuit.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.Time;
 
 @ApiModel(description = "航班信息")
 @Data
-@Mapper
 public class Flight {
     @ApiModelProperty("航班号")
     private String airId;

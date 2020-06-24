@@ -3,6 +3,8 @@ package cn.cuit.web.controller;
 import cn.cuit.mapper.UserMapper;
 import cn.cuit.model.RegistrationForm;
 import cn.cuit.model.RespBean;
+import cn.cuit.service.backstage.UserService;
+import cn.cuit.service.forestage.RegistrationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,8 @@ import java.util.UUID;
 @RequestMapping("/register")
 public class RegistrationController {
     @Autowired
-    UserMapper userMapper;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    RegistrationService registrationService;
+
     @ApiOperation("跳转到注册页面")
     @GetMapping
     public void toRegister(HttpServletResponse response){
@@ -29,10 +30,7 @@ public class RegistrationController {
     @ApiOperation("注册")
     @PostMapping
     public RespBean register(@RequestBody RegistrationForm form){
-        form.setId(UUID.randomUUID().toString().replace("-",""));
-        form.setPassword(passwordEncoder.encode(form.getPassword()));
-        form.setEnabled(true);
-        if(userMapper.insertUser(form.toUser())!=0){
+        if(registrationService.register(form)){
             return RespBean.ok("注册成功！");
         }else{
             return RespBean.error("注册失败！");

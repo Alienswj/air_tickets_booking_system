@@ -20,9 +20,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("loadUserByUsername");
+        System.out.println("loadUserByUsername:"+username);
         User user=userMapper.loadUserByUsername(username);
         if(user==null){
+            System.out.println("null");
             throw new UsernameNotFoundException("用户名不存在");
         }else{
             logger.info(user.toString());
