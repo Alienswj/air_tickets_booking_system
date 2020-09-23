@@ -7,8 +7,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: adminblhk
-    url: jdbc:mysql://47.113.103.83:3306/air_tickets_booking_system?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=utf-8
+    password: 1356
+    url: jdbc:mysql://localhost:3307/air_tickets_booking_system?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
     #Spring Boot默认是不注入这些属性值的,需要自己绑定
     druid:
